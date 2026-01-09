@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LABSI 2025/26 - Relatório</title>
+    <style>
+        /* --- GENERAL STYLES --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- HEADER SECTION --- */
+        header {
+            background-color: #0099ff; /* Keeping the original blue */
+            color: white;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-content h1 { margin: 0; font-size: 2.5rem; }
+        .header-content h2 { margin: 0; font-weight: 300; opacity: 0.9; }
+        
+        .logo-box {
+            text-align: right;
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        /* --- AUTHOR SECTION --- */
+        .authors {
+            background: #007acc;
+            color: white;
+            padding: 1rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+        .author-card { border-left: 3px solid rgba(255,255,255,0.5); padding-left: 10px; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.5rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        nav a:hover { background-color: #0099ff; color: white; }
+
+        /* --- MAIN CONTENT --- */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-top: 4px solid #0099ff;
+        }
+
+        h3 { color: #0099ff; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        
+        .back-to-top {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            color: #999;
+            text-decoration: none;
+        }
+        .back-to-top:hover { color: #0099ff; }
+
+        /* --- REFERENCES --- */
+        .references p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+        /* --- PLACEHOLDER FOR MISSING IMAGES --- */
+        .missing-img {
+            background: #ddd;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            border: 2px dashed #aaa;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="inicio">
+        <div class="header-content">
+            <h1>Título do Projeto</h1> <h2>Relatório Técnico</h2>
+        </div>
+        <div class="logo-box">
+            <strong>LABSI</strong><br>2025/26
+        </div>
+    </header>
+
+    <div class="authors">
+        <div class="author-card">
+            <strong>Rodrigo Pires (Nº1210697)</strong><br>
+            1210697@isep.ipp.pt
+        </div>
+        <div class="author-card">
+            <strong>Bruno Magalhães (Nº1230657)</strong><br>
+            1230657@isep.ipp.pt
+        </div>
+    </div>
+
+    <nav>
+        <a href="#intro">Introdução</a>
+        <a href="#arq">Arquitetura</a>
+        <a href="#hard">Hardware</a>
+        <a href="#soft">Software</a>
+        <a href="#res">Resultados</a>
+        <a href="#concl">Conclusões</a>
+        <a href="#ref">Referências</a>
+    </nav>
+
+    <div class="container">
+
+        <section style="text-align: center;">
+            <h3>Demonstração</h3>
+            <div class="missing-img">
+                [Vídeo video01.mp4 deve ficar aqui]
+            </div>
+            </section>
+
+        <section id="intro">
+            <h3>Introdução</h3>
+            <p>Escreva o texto da introdução aqui...</p>
+            <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
+        </section>
+
+        <section id="arq">
+            <h3>Arquitetura</h3>
+            <p>Descreva a arquitetura do sistema aqui...</p>
+            <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
+        </section>
+
+        <section id="hard">
+            <h3>Hardware</h3>
+            <p>Detalhes sobre o hardware utilizado...</p>
+            <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
+        </section>
+
+        <section id="soft">
+            <h3>Software</h3>
+            <p>Detalhes sobre o software desenvolvido...</p>
+            <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
+        </section>
+
+        <section id="res">
+            <h3>Resultados</h3>
+            <p>Apresentação dos resultados obtidos...</p>
+            <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
+        </section>
+
+        <section id="concl">
+            <h3>Conclusões</h3>
+            <p>Conclusões finais do projeto...</p>
+            <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
+        </section>
+
+        <section id="ref" class="references">
+            <h3>Referências</h3>
+            <p>[1] Alcatel—SAM-O Service Aware Manager Open Interface, Release 3.0.</p>
+            <p>[2] AZEVEDO, Carlos—Metodologia Científica: contributos práticos.</p>
+            <p>[3] Hofmann, Alfred—Lecture Notes in Computer Science.</p>
+            <p>[4] Mauro, Douglas—Essential SNMP, Help for System and Network Administrators.</p>
+            <p>[5] Net-SNMP, Version: 5.2.1, <a href="http://www.net-snmp.org/">http://www.net-snmp.org/</a></p>
+            <p>[6] PINTO, J. A. Cardoso—RETA, Manual de Referência.</p>
+            <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
+        </section>
+
+    </div>
+
+</body>
+</html>
