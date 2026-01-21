@@ -158,14 +158,30 @@
 
         <section id="intro">
             <h3>Introdução</h3>
-            <p>Escreva o texto da introdução aqui...</p>
+            <h4>Descrição</h4>
+            <p>No âmbito da Unidade Curricular de Laboratório de Sistemas do 1º Semestre do 3º ano da Licenciatura de Engenharia Eletrotécnica e de Computadores do Instituto Superior de Engenharia do Porto, foi desenvolvido um sistema de monitorização do clima.</p>
+            <p>No contexto atual da <i>Internet of Things</i> e da domótica, a monitorização do conforto térmico é fundamental para a contribuição de um bem estar pessoal.</p>
+            <p>Este projeto propõe o desenvolvimento de uma estação metereológica residencial, em que o seu objetivo é monitorizar a Temperatura e a Humidade para concluir como está o clima atual.</p>
+            <p>Adicionalmente o sistema deteta precipitação para automatizar a recolha de um estendal.</p>
+            <h4>Estado de Arte</h4>
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
 
         <section id="arq">
             <h3>Arquitetura</h3>
-            <p>Descreva a arquitetura do sistema aqui...</p>
-            <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
+            <p>Neste projeto o Atmega328p funciona como o cérebro, gerindo a aquisição de dados e o controlo de atuadores.</p>
+            <img
+                src="bd.svg"
+                alt=""
+                height="100%"
+                width="100%" />
+            <p>
+                <ul>
+                    <li><b>Barramento I2C:</b> Os dois sensores (AHT20, BMP280) e o ecrã LCD partilham as mesmas duas linhas de comunicação (SDA e SCL). O microcontrolador distingue cada dispositivo através do seu endereço digital.</li>
+                    <li><b>Controlo PWM (Pulse Width Modulation):</b> O servomotor é controlado por um sinal PWM gerado diretamente pelo Timer1 do ATmega328P.</li>
+                    <li><b>I/O:</b> A leitura do sensor de chuva e o acionamento dos LEDs são realizados através de manipulação direta de bits nos registos PINC (Entrada) e PORTD/PORTB (Saída).</li>
+                </ul>
+            </p>
         </section>
 
         <section id="hard">
