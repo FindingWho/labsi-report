@@ -88,6 +88,7 @@
         }
 
         h3 { color: #0099ff; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        h4 { color: #555; margin-top: 20px; margin-bottom: 10px; }
         
         .back-to-top {
             display: block;
@@ -113,13 +114,23 @@
             border: 2px dashed #aaa;
             margin: 1rem 0;
         }
+        
+        .figure-caption {
+            font-style: italic;
+            color: #7f8c8d;
+            text-align: center;
+            font-size: 0.9em;
+            display: block;
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
     <header id="inicio">
         <div class="header-content">
-            <h1>Título do Projeto</h1> <h2>Relatório Técnico</h2>
+            <h1>Estação Meteorológica</h1> <h2>Relatório Técnico</h2>
         </div>
         <div class="logo-box">
             <strong>LABSI</strong><br>2025/26
@@ -154,39 +165,68 @@
             <div class="missing-img">
                 [Vídeo video01.mp4 deve ficar aqui]
             </div>
-            </section>
+        </section>
 
         <section id="intro">
             <h3>Introdução</h3>
+            
             <h4>Descrição</h4>
-            <p>No âmbito da Unidade Curricular de Laboratório de Sistemas do 1º Semestre do 3º ano da Licenciatura de Engenharia Eletrotécnica e de Computadores do Instituto Superior de Engenharia do Porto, foi desenvolvido um sistema de monitorização do clima.</p>
-            <p>No contexto atual da <i>Internet of Things</i> e da domótica, a monitorização do conforto térmico é fundamental para a contribuição de um bem estar pessoal.</p>
-            <p>Este projeto propõe o desenvolvimento de uma estação metereológica residencial, em que o seu objetivo é monitorizar a Temperatura e a Humidade para concluir como está o clima atual.</p>
-            <p>Adicionalmente o sistema deteta precipitação para automatizar a recolha de um estendal.</p>
-            <h4>Estado de Arte</h4>
+            <p>No âmbito da Unidade Curricular de Laboratório de Sistemas do 1º Semestre do 3º ano da Licenciatura, foi desenvolvido um sistema de monitorização do clima.</p>
+            <p>No contexto da "Smart Home" (Casa Inteligente) e da domótica, a monitorização do conforto térmico e das condições exteriores é fundamental para um bem-estar pessoal. Este projeto propõe o desenvolvimento de uma <strong>Estação Meteorológica Residencial.
+            <p>Adicionalmente, o sistema deteta chuva para automatizar a recolha de um estendal.</p>
+            
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
 
         <section id="arq">
             <h3>Arquitetura</h3>
-            <p>Neste projeto o Atmega328p funciona como o cérebro, gerindo a aquisição de dados e o controlo de atuadores.</p>
-            <img
-                src="bd.svg"
-                alt=""
-                height="100%"
-                width="100%" />
-            <p>
-                <ul>
-                    <li><b>Barramento I2C:</b> Os dois sensores (AHT20, BMP280) e o ecrã LCD partilham as mesmas duas linhas de comunicação (SDA e SCL). O microcontrolador distingue cada dispositivo através do seu endereço digital.</li>
-                    <li><b>Controlo PWM (Pulse Width Modulation):</b> O servomotor é controlado por um sinal PWM gerado diretamente pelo Timer1 do ATmega328P.</li>
-                    <li><b>I/O:</b> A leitura do sensor de chuva e o acionamento dos LEDs são realizados através de manipulação direta de bits nos registos PINC (Entrada) e PORTD/PORTB (Saída).</li>
-                </ul>
-            </p>
+            <p>A arquitetura do sistema baseia-se numa topologia centralizada em estrela, onde o microcontrolador ATmega328P atua como mestre, gerindo a aquisição de dados e o controlo de atuadores através de barramentos digitais dedicados.</p>
+            
+            <!-- SVG Image Placeholder -->
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="bd.svg" alt="Diagrama de Blocos da Arquitetura" style="max-width: 100%; height: auto;">
+            </div>
+            
+            <ul>
+                <li><b>Barramento I2C:</b> Os dois sensores (AHT20, BMP280) e o ecrã LCD partilham as mesmas duas linhas de comunicação (SDA e SCL). O microcontrolador distingue cada dispositivo através do seu endereço digital.</li>
+                <li><b>Controlo PWM (Pulse Width Modulation):</b> O servomotor é controlado pelo <strong>Timer1</strong> (Hardware) do ATmega328P. Isto garante movimentos precisos sem ocupar ciclos de processamento da CPU.</li>
+                <li><b>I/O:</b> A leitura do sensor de chuva e o acionamento dos LEDs são realizados através de manipulação direta de bits nos registos PINC (Entrada) e PORTD/PORTB (Saída).</li>
+            </ul>
+            <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
 
         <section id="hard">
             <h3>Hardware</h3>
-            <p>Detalhes sobre o hardware utilizado...</p>
+            <p>Neste capítulo são apresentados os componentes selecionados para o projeto, detalhando a sua função no sistema.</p>
+
+            <h4>Microcontrolador ATmega328P</h4>
+            <div class="ATmega328P" style="text-align: center; margin: 20px 0;"><img src="ATmega328P.png" alt="Pinout do ATmega328P" style="max-width: 50%; height: auto;"></div>
+            <p>O "cérebro" do sistema é o ATmega328P, um microcontrolador de 8 bits da arquitetura AVR. A sua escolha deve-se ao equilíbrio entre performance e baixo consumo energético. Operando a 8MHz (oscilador interno), ele gere todos os protocolos de comunicação (I2C, UART) e temporizadores necessários. A programação "Bare Metal" permite utilizar a totalidade dos 32KB de memória Flash de forma otimizada.</p>
+
+            <h4>Sensores Ambientais (Barramento I2C)</h4>
+            
+            <p><strong>Sensor AHT20 (Temperatura e Humidade):</strong></p>
+            <div class="AHT20" style="text-align: center; margin: 20px 0;"><img src="AHT20.png" alt="Módulo AHT20" style="max-width: 50%; height: auto;"></div>
+            <p>Escolhido pela sua fiabilidade e calibração de fábrica. Comunica via I2C, eliminando a necessidade de protocolos "single-wire" complexos. Fornece os dados base para o cálculo do Índice de Calor ("Real Feel").</p>
+
+            <p><strong>Sensor BMP280 (Pressão Barométrica):</strong></p>
+            <div class="BMP280" style="text-align: center; margin: 20px 0;"><img src="BMP280.png" alt="Módulo BMP280" style="max-width: 50%; height: auto;"></div>
+            <p>Desenvolvido pela Bosch, este sensor piezo-resistivo mede a pressão atmosférica com elevada precisão. Utiliza o endereço I2C 0x77 e permite monitorizar a pressão em hPa (Hectopascais), útil para inferir tendências meteorológicas.</p>
+
+            <h4>Interface e Atuadores</h4>
+
+            <p><strong>Ecrã LCD 20x4 (c/ Adaptador I2C):</strong></p>
+            <div class="LCD2004" style="text-align: center; margin: 20px 0;"><img src="2004A.png" alt="LCD 2004A com I2C" style="max-width: 50%; height: auto;"></div>
+            <p>Para a visualização dos dados, optou-se por um LCD de 4 linhas. A inclusão de um adaptador I2C (baseado no chip PCF8574) é crucial, pois reduz o número de pinos necessários de 6 (modo paralelo) para apenas 2 (SDA/SCL).</p>
+
+            <p><strong>Servomotor SG90:</strong></p>
+            <div class="SG90" style="text-align: center; margin: 20px 0;"><img src="SG90.png" alt="Micro Servo SG90" style="max-width: 50%; height: auto;"></div>
+            <p>O servo simula o mecanismo de proteção (teto retrátil), controlado por PWM a 50Hz.</p>
+
+            <h4>Esquema Elétrico</h3>
+            <span class="figure-caption"><img src="kicad.svg" alt="kicad" style="max-width: 100%; height: auto;"></span>
+            <p>O circuito é alimentado por uma bateria de 9V, regulada para 5V através de um regulador linear (ex: LM7805) para alimentar o ATmega328P e os sensores.</p>
+
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
 
@@ -213,9 +253,9 @@
             <p>[1] Alcatel—SAM-O Service Aware Manager Open Interface, Release 3.0.</p>
             <p>[2] AZEVEDO, Carlos—Metodologia Científica: contributos práticos.</p>
             <p>[3] Hofmann, Alfred—Lecture Notes in Computer Science.</p>
-            <p>[4] Mauro, Douglas—Essential SNMP, Help for System and Network Administrators.</p>
-            <p>[5] Net-SNMP, Version: 5.2.1, <a href="http://www.net-snmp.org/">http://www.net-snmp.org/</a></p>
-            <p>[6] PINTO, J. A. Cardoso—RETA, Manual de Referência.</p>
+            <p>[4] AHT20 Datasheet, ASAIR.</p>
+            <p>[5] BMP280 Datasheet, Bosch Sensortec.</p>
+            <p>[6] ATmega328P Datasheet, Microchip Technology.</p>
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
 
