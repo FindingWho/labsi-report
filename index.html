@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LABSI 2025/26 - Relatório</title>
+    <!-- Script for Architecture Diagram -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <!-- Script for 3D PCB Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     <style>
         /* --- GENERAL STYLES --- */
         body {
@@ -160,20 +167,24 @@
 
     <div class="container">
 
-        <section style="text-align: center;">
-            <h3>Demonstração</h3>
-            <div class="missing-img">
-                [Vídeo video01.mp4 deve ficar aqui]
-            </div>
-        </section>
+        <!-- VIDEO SECTION REMOVED FROM HERE -->
 
         <section id="intro">
             <h3>Introdução</h3>
             
             <h4>Descrição</h4>
             <p>No âmbito da Unidade Curricular de Laboratório de Sistemas do 1º Semestre do 3º ano da Licenciatura, foi desenvolvido um sistema de monitorização do clima.</p>
-            <p>No contexto da "Smart Home" (Casa Inteligente) e da domótica, a monitorização do conforto térmico e das condições exteriores é fundamental para um bem-estar pessoal. Este projeto propõe o desenvolvimento de uma <strong>Estação Meteorológica Residencial.</strong>
-            <p>Adicionalmente, o sistema deteta chuva para automatizar a recolha de um estendal.</p>
+            <p>No contexto da "Smart Home" (Casa Inteligente) e da domótica, a monitorização do conforto térmico e das condições exteriores é fundamental para a eficiência energética e bem-estar dos habitantes. Este projeto propõe o desenvolvimento de uma <strong>Estação Meteorológica Residencial IoT</strong> compacta.</p>
+            <p>O seu objetivo é monitorizar <strong>Temperatura, Humidade Relativa e Pressão Atmosférica</strong>, calculando ainda a <strong>"Sensação Térmica" (Heat Index)</strong> para fornecer um feedback visual imediato sobre o nível de conforto exterior através de um código de cores LED. Adicionalmente, o sistema deteta precipitação para automatizar o fecho de janelas ou estores (simulado por um servomotor), prevenindo danos no interior da habitação.</p>
+            
+            <h4>Estado de Arte</h4>
+            <p>Para contextualizar este projeto, comparamos as soluções existentes no mercado e no ambiente académico, focando-nos no hardware e na metodologia de programação.</p>
+            
+            <p><strong>1. Soluções Existentes:</strong> O mercado atual divide-se em dois extremos: produtos comerciais fechados (ex: Netatmo) que são caros e impossíveis de modificar, e projetos académicos baseados em Arduino que utilizam bibliotecas prontas ("bloatware"), ocultando a complexidade do sistema.</p>
+            
+            <p><strong>2. Evolução dos Sensores:</strong> O projeto abandona os sensores analógicos obsoletos em favor da tecnologia MEMS Digital com comunicação I2C. O sensor <strong>AHT20</strong> oferece calibração de fábrica e resposta rápida para humidade, enquanto o <strong>BMP280</strong> permite leituras de pressão atmosférica com precisão suficiente para detetar pequenas variações de altitude.</p>
+            
+            <p><strong>3. Abordagem "Bare Metal":</strong> O elemento diferenciador deste projeto é a sua implementação em <strong>C "Bare Metal"</strong>. Em vez de recorrer a bibliotecas Arduino abstratas, os <em>drivers</em> foram escritos manualmente, manipulando diretamente os registos do microcontrolador ATmega328P. Isto simula o ambiente de desenvolvimento de produtos eletrónicos profissionais, onde a eficiência de memória e o controlo temporal são críticos.</p>
             
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
@@ -182,7 +193,6 @@
             <h3>Arquitetura</h3>
             <p>A arquitetura do sistema baseia-se numa topologia centralizada em estrela, onde o microcontrolador ATmega328P atua como mestre, gerindo a aquisição de dados e o controlo de atuadores através de barramentos digitais dedicados.</p>
             
-            <!-- SVG Image Placeholder -->
             <div style="text-align: center; margin: 20px 0;">
                 <img src="bd.svg" alt="Diagrama de Blocos da Arquitetura" style="max-width: 100%; height: auto;">
             </div>
@@ -200,7 +210,7 @@
             <p>Neste capítulo são apresentados os componentes selecionados para o projeto, detalhando a sua função no sistema.</p>
 
             <h4>Microcontrolador ATmega328P</h4>
-            <div class="ATmega328P" style="text-align: center; margin: 20px 0;"><img src="ATMEGA328P.png" alt="Pinout do ATmega328P" style="max-width: 50%; height: auto;"></div>
+            <div class="ATmega328P" style="text-align: center; margin: 20px 0;"><img src="ATmega328P.png" alt="Pinout do ATmega328P" style="max-width: 50%; height: auto;"></div>
             <p>O "cérebro" do sistema é o ATmega328P, um microcontrolador de 8 bits da arquitetura AVR. A sua escolha deve-se ao equilíbrio entre performance e baixo consumo energético. Operando a 8MHz (oscilador interno), ele gere todos os protocolos de comunicação (I2C, UART) e temporizadores necessários. A programação "Bare Metal" permite utilizar a totalidade dos 32KB de memória Flash de forma otimizada.</p>
 
             <h4>Sensores Ambientais (Barramento I2C)</h4>
@@ -223,9 +233,58 @@
             <div class="SG90" style="text-align: center; margin: 20px 0;"><img src="SG90.png" alt="Micro Servo SG90" style="max-width: 50%; height: auto;"></div>
             <p>O servo simula o mecanismo de proteção (teto retrátil), controlado por PWM a 50Hz.</p>
 
-            <h4>Esquema Elétrico</h3>
-            <span class="figure-caption"><img src="kicad.svg" alt="kicad" style="max-width: 100%; height: auto;"></span>
+            <h4>Esquema Elétrico</h4>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="kicad.svg" alt="Diagrama de Blocos da Arquitetura" style="max-width: 100%; height: auto;">
+            </div>
+            <span class="figure-caption">*Figura 8 - Esquema de Ligações*</span>
+
             <p>O circuito é alimentado por uma bateria de 9V, regulada para 5V através de um regulador linear (ex: LM7805) para alimentar o ATmega328P e os sensores.</p>
+
+            <h4>Design da Placa (PCB)</h4>
+            <p>Abaixo apresenta-se a lista de materiais interativa e a visualização 3D da placa de circuito impresso desenhada. Esta visualização utiliza PBR (Physically Based Rendering) para simular materiais reais.</p>
+            
+            <!-- KICAD EMBED SECTION (IBOM) -->
+            <div style="width: 100%; height: 600px; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; margin-bottom: 20px;">
+                <iframe src="ibom.html" style="width: 100%; height: 100%; border: none;" title="Esquema KiCad">
+                    <p>O seu navegador não suporta iframes.</p>
+                </iframe>
+            </div>
+
+            <div style="width: 100%; height: 500px; background-color: #eee; border-radius: 4px; overflow: hidden; border: 1px solid #ccc;">
+                <!-- 3D VIEWER: HIGH FIDELITY SETTINGS -->
+                <model-viewer 
+                    id="pcb-viewer"
+                    src="pcb.glb" 
+                    alt="Modelo 3D da PCB"
+                    auto-rotate
+                    camera-controls
+                    ar
+                    shadow-intensity="1"
+                    shadow-softness="1"
+                    environment-image="neutral"
+                    exposure="1.2"
+                    tone-mapping="commerce"
+                    style="width: 100%; height: 100%; background-color: #f5f5f5;"
+                >
+                    <div slot="progress-bar"></div>
+                </model-viewer>
+            </div>
+
+            <!-- Script to Pause Rotation on Hover -->
+            <script>
+                const modelViewer = document.querySelector('#pcb-viewer');
+                
+                // Stop rotation when mouse enters
+                modelViewer.addEventListener('mouseenter', () => {
+                    modelViewer.removeAttribute('auto-rotate');
+                });
+                
+                // Resume rotation when mouse leaves
+                modelViewer.addEventListener('mouseleave', () => {
+                    modelViewer.setAttribute('auto-rotate', '');
+                });
+            </script>
 
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
@@ -238,7 +297,53 @@
 
         <section id="res">
             <h3>Resultados</h3>
-            <p>Apresentação dos resultados obtidos...</p>
+            <p>Após a montagem do hardware e a programação dos drivers "Bare Metal", o sistema foi submetido a uma série de testes funcionais para validar os requisitos iniciais.</p>
+
+            <h4>Demonstração do Funcionamento</h4>
+            <p>O vídeo seguinte demonstra o sistema em funcionamento, incluindo a leitura dos sensores e a atuação do servo mediante a deteção de chuva.</p>
+            <div class="missing-img">
+                [Vídeo video01.mp4 deve ficar aqui]
+            </div>
+            <span class="figure-caption">*Vídeo 1 - Demonstração do Sistema Completo*</span>
+
+            <h4>Protótipo Funcional</h4>
+            <div class="missing-img">[Foto: O sistema completo montado na breadboard com o LCD ligado]</div>
+            <p>A integração dos componentes foi bem sucedida. O barramento I2C, partilhado por três dispositivos (LCD, AHT20, BMP280), operou de forma estável a 100kHz, sem conflitos de endereçamento.</p>
+
+            <h4>Testes de Validação</h4>
+            <ul>
+                <li><strong>Leitura de Sensores:</strong> O sistema apresenta leituras consistentes. A temperatura e humidade do AHT20 reagem rapidamente a mudanças (ex: soprar no sensor), e o BMP280 reporta a pressão atmosférica correta para a altitude local (~1013 hPa ao nível do mar).</li>
+                <li><strong>Lógica de "Real Feel":</strong> Verificou-se a alteração correta dos LEDs de estado. Ao aquecer artificialmente o sensor acima de 29°C, o LED Vermelho ativou-se conforme programado no algoritmo de <em>Heat Index</em>.</li>
+                <li><strong>Proteção Automática (Chuva):</strong> O sensor de chuva resistivo demonstrou uma resposta imediata (< 50ms). Ao detetar humidade, o servomotor rodou para a posição de 90° ("Fechado") e o LCD atualizou o estado para "RAINING".</li>
+            </ul>
+
+            <h4>Eficiência de Memória (Bare Metal vs. Bibliotecas)</h4>
+            <p>Um dos principais objetivos da abordagem "Bare Metal" era a otimização de recursos. Comparando o nosso código final com uma implementação equivalente utilizando bibliotecas Arduino padrão (Adafruit_Sensor, LiquidCrystal_I2C, Servo.h), observou-se uma redução drástica no uso de memória:</p>
+            
+            <table border="1" style="width:100%; border-collapse: collapse; margin: 20px 0; text-align: center;">
+                <tr style="background-color: #0099ff; color: white;">
+                    <th style="padding: 10px;">Métrica</th>
+                    <th>Abordagem Bare Metal (Este Projeto)</th>
+                    <th>Abordagem Arduino (Estimativa)</th>
+                    <th>Ganho</th>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; font-weight: bold;">Memória Flash (Programa)</td>
+                    <td>~3 KB</td>
+                    <td>~12 KB</td>
+                    <td style="color: green; font-weight: bold;">~75% Livre</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; font-weight: bold;">Latência de Arranque</td>
+                    <td>Imediata (< 100ms)</td>
+                    <td>Lenta (~2s bootloader)</td>
+                    <td style="color: green; font-weight: bold;">Mais Rápido</td>
+                </tr>
+            </table>
+            <span class="figure-caption">*Tabela 1 - Comparação de eficiência de recursos*</span>
+
+            <p>Isto comprova que a escrita de drivers personalizados, embora mais complexa, resulta num firmware significativamente mais leve e eficiente.</p>
+
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
 
