@@ -24,7 +24,7 @@
 
         /* --- HEADER SECTION --- */
         header {
-            background-color: #0099ff; /* Keeping the original blue */
+            background-color: #9a1a24; /* Uni Red */
             color: white;
             padding: 2rem;
             display: flex;
@@ -45,7 +45,7 @@
 
         /* --- AUTHOR SECTION --- */
         .authors {
-            background: #007acc;
+            background: #7a151d; /* Darker Red for contrast */
             color: white;
             padding: 1rem 2rem;
             display: grid;
@@ -76,7 +76,7 @@
             border-radius: 4px;
             transition: all 0.3s ease;
         }
-        nav a:hover { background-color: #0099ff; color: white; }
+        nav a:hover { background-color: #9a1a24; color: white; }
 
         /* --- MAIN CONTENT --- */
         .container {
@@ -91,10 +91,10 @@
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-top: 4px solid #0099ff;
+            border-top: 4px solid #9a1a24;
         }
 
-        h3 { color: #0099ff; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        h3 { color: #9a1a24; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         h4 { color: #555; margin-top: 20px; margin-bottom: 10px; }
         
         .back-to-top {
@@ -105,7 +105,7 @@
             color: #999;
             text-decoration: none;
         }
-        .back-to-top:hover { color: #0099ff; }
+        .back-to-top:hover { color: #9a1a24; }
 
         /* --- REFERENCES --- */
         .references p { font-size: 0.9rem; margin-bottom: 0.5rem; }
@@ -137,10 +137,10 @@
 
     <header id="inicio">
         <div class="header-content">
-            <h1>Estação Meteorológica</h1> <h2>Relatório Técnico</h2>
+            <h1>Estação Meteorológica Residencial</h1>
         </div>
         <div class="logo-box">
-            <strong>LABSI</strong><br>2025/26
+            <strong>LABSI</strong><br>2025/2026
         </div>
     </header>
 
@@ -167,39 +167,28 @@
 
     <div class="container">
 
-        <!-- VIDEO SECTION REMOVED FROM HERE -->
-
         <section id="intro">
             <h3>Introdução</h3>
             
             <h4>Descrição</h4>
             <p>No âmbito da Unidade Curricular de Laboratório de Sistemas do 1º Semestre do 3º ano da Licenciatura, foi desenvolvido um sistema de monitorização do clima.</p>
-            <p>No contexto da "Smart Home" (Casa Inteligente) e da domótica, a monitorização do conforto térmico e das condições exteriores é fundamental para a eficiência energética e bem-estar dos habitantes. Este projeto propõe o desenvolvimento de uma <strong>Estação Meteorológica Residencial IoT</strong> compacta.</p>
-            <p>O seu objetivo é monitorizar <strong>Temperatura, Humidade Relativa e Pressão Atmosférica</strong>, calculando ainda a <strong>"Sensação Térmica" (Heat Index)</strong> para fornecer um feedback visual imediato sobre o nível de conforto exterior através de um código de cores LED. Adicionalmente, o sistema deteta precipitação para automatizar o fecho de janelas ou estores (simulado por um servomotor), prevenindo danos no interior da habitação.</p>
-            
-            <h4>Estado de Arte</h4>
-            <p>Para contextualizar este projeto, comparamos as soluções existentes no mercado e no ambiente académico, focando-nos no hardware e na metodologia de programação.</p>
-            
-            <p><strong>1. Soluções Existentes:</strong> O mercado atual divide-se em dois extremos: produtos comerciais fechados (ex: Netatmo) que são caros e impossíveis de modificar, e projetos académicos baseados em Arduino que utilizam bibliotecas prontas ("bloatware"), ocultando a complexidade do sistema.</p>
-            
-            <p><strong>2. Evolução dos Sensores:</strong> O projeto abandona os sensores analógicos obsoletos em favor da tecnologia MEMS Digital com comunicação I2C. O sensor <strong>AHT20</strong> oferece calibração de fábrica e resposta rápida para humidade, enquanto o <strong>BMP280</strong> permite leituras de pressão atmosférica com precisão suficiente para detetar pequenas variações de altitude.</p>
-            
-            <p><strong>3. Abordagem "Bare Metal":</strong> O elemento diferenciador deste projeto é a sua implementação em <strong>C "Bare Metal"</strong>. Em vez de recorrer a bibliotecas Arduino abstratas, os <em>drivers</em> foram escritos manualmente, manipulando diretamente os registos do microcontrolador ATmega328P. Isto simula o ambiente de desenvolvimento de produtos eletrónicos profissionais, onde a eficiência de memória e o controlo temporal são críticos.</p>
+            <p>No contexto da "Smart Home" (Casa Inteligente) e da domótica, a monitorização do conforto térmico e das condições exteriores é fundamental para a eficiência energética e bem-estar dos habitantes. Este projeto propõe o desenvolvimento de uma <strong>Estação Meteorológica Residencial</strong> compacta.</p>
+            <p>O seu objetivo é monitorizar <strong>Temperatura, Humidade Relativa e Pressão Atmosférica</strong>, calculando ainda a <strong>"Sensação Térmica"</strong> para fornecer um feedback visual imediato sobre o nível de conforto exterior através de um código de cores LED. Adicionalmente, o sistema deteta precipitação para automatizar a recolha de um estendal (simulado por um servomotor), prevenindo danos no interior da habitação.</p>
             
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
 
         <section id="arq">
             <h3>Arquitetura</h3>
-            <p>A arquitetura do sistema baseia-se numa topologia centralizada em estrela, onde o microcontrolador ATmega328P atua como mestre, gerindo a aquisição de dados e o controlo de atuadores através de barramentos digitais dedicados.</p>
+            <p>A arquitetura do sistema baseia-se numa topologia em estrela, onde o microcontrolador ATmega328P atua como o centro, gerindo a aquisição de dados e o controlo de atuadores.</p>
             
             <div style="text-align: center; margin: 20px 0;">
-                <img src="bd.svg" alt="Diagrama de Blocos da Arquitetura" style="max-width: 100%; height: auto;">
-            </div>
+            <img src="bd.svg" alt="Diagrama de Blocos da Arquitetura" style="max-width: 100%; height: auto;">
+            </div> 
             
             <ul>
                 <li><b>Barramento I2C:</b> Os dois sensores (AHT20, BMP280) e o ecrã LCD partilham as mesmas duas linhas de comunicação (SDA e SCL). O microcontrolador distingue cada dispositivo através do seu endereço digital.</li>
-                <li><b>Controlo PWM (Pulse Width Modulation):</b> O servomotor é controlado pelo <strong>Timer1</strong> (Hardware) do ATmega328P. Isto garante movimentos precisos sem ocupar ciclos de processamento da CPU.</li>
+                <li><b>Controlo PWM (Pulse Width Modulation):</b> O servomotor é controlado pelo <strong>Timer1</strong> do ATmega328P.</li>
                 <li><b>I/O:</b> A leitura do sensor de chuva e o acionamento dos LEDs são realizados através de manipulação direta de bits nos registos PINC (Entrada) e PORTD/PORTB (Saída).</li>
             </ul>
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
@@ -207,39 +196,35 @@
 
         <section id="hard">
             <h3>Hardware</h3>
-            <p>Neste capítulo são apresentados os componentes selecionados para o projeto, detalhando a sua função no sistema.</p>
 
             <h4>Microcontrolador ATmega328P</h4>
-            <div class="ATmega328P" style="text-align: center; margin: 20px 0;"><img src="ATmega328P.png" alt="Pinout do ATmega328P" style="max-width: 50%; height: auto;"></div>
-            <p>O "cérebro" do sistema é o ATmega328P, um microcontrolador de 8 bits da arquitetura AVR. A sua escolha deve-se ao equilíbrio entre performance e baixo consumo energético. Operando a 8MHz (oscilador interno), ele gere todos os protocolos de comunicação (I2C, UART) e temporizadores necessários. A programação "Bare Metal" permite utilizar a totalidade dos 32KB de memória Flash de forma otimizada.</p>
+            <div class="ATmega328P" style="text-align: center; margin: 20px 0;"><img src="ATMEGA328P.png" alt="Pinout do ATmega328P" style="max-width: 50%; height: auto;"></div>
+            <p>O "cérebro" do sistema é o ATmega328P, um microcontrolador de 8 bits da arquitetura AVR. Operando a 8MHz (oscilador interno), ele gere os protocolos de comunicação e temporizadores necessários.</p>
 
             <h4>Sensores Ambientais (Barramento I2C)</h4>
             
             <p><strong>Sensor AHT20 (Temperatura e Humidade):</strong></p>
             <div class="AHT20" style="text-align: center; margin: 20px 0;"><img src="AHT20.png" alt="Módulo AHT20" style="max-width: 50%; height: auto;"></div>
-            <p>Escolhido pela sua fiabilidade e calibração de fábrica. Comunica via I2C, eliminando a necessidade de protocolos "single-wire" complexos. Fornece os dados base para o cálculo do Índice de Calor ("Real Feel").</p>
+            <p>Sensor de temperatura e humidade relativa. Mede a temperatura na gama de -40 a 85 ºC.</p>
 
             <p><strong>Sensor BMP280 (Pressão Barométrica):</strong></p>
             <div class="BMP280" style="text-align: center; margin: 20px 0;"><img src="BMP280.png" alt="Módulo BMP280" style="max-width: 50%; height: auto;"></div>
-            <p>Desenvolvido pela Bosch, este sensor piezo-resistivo mede a pressão atmosférica com elevada precisão. Utiliza o endereço I2C 0x77 e permite monitorizar a pressão em hPa (Hectopascais), útil para inferir tendências meteorológicas.</p>
+            <p>Barómetro digital. Mede a pressão atmosférica na gama de 300 a 1100 hPa.</p>
 
             <h4>Interface e Atuadores</h4>
 
             <p><strong>Ecrã LCD 20x4 (c/ Adaptador I2C):</strong></p>
             <div class="LCD2004" style="text-align: center; margin: 20px 0;"><img src="2004A.png" alt="LCD 2004A com I2C" style="max-width: 50%; height: auto;"></div>
-            <p>Para a visualização dos dados, optou-se por um LCD de 4 linhas. A inclusão de um adaptador I2C (baseado no chip PCF8574) é crucial, pois reduz o número de pinos necessários de 6 (modo paralelo) para apenas 2 (SDA/SCL).</p>
+            <p>Para a visualização dos dados, optou-se por um LCD de 4 linhas com um módulo I2C.</p>
 
             <p><strong>Servomotor SG90:</strong></p>
             <div class="SG90" style="text-align: center; margin: 20px 0;"><img src="SG90.png" alt="Micro Servo SG90" style="max-width: 50%; height: auto;"></div>
-            <p>O servo simula o mecanismo de proteção (teto retrátil), controlado por PWM a 50Hz.</p>
+            <p>O servo simula o mecanismo de recolha de um estendal, controlado por PWM a 50Hz.</p>
 
             <h4>Esquema Elétrico</h4>
             <div style="text-align: center; margin: 20px 0;">
                 <img src="kicad.svg" alt="Diagrama de Blocos da Arquitetura" style="max-width: 100%; height: auto;">
             </div>
-            <span class="figure-caption">*Figura 8 - Esquema de Ligações*</span>
-
-            <p>O circuito é alimentado por uma bateria de 9V, regulada para 5V através de um regulador linear (ex: LM7805) para alimentar o ATmega328P e os sensores.</p>
 
             <h4>Design da Placa (PCB)</h4>
             <p>Abaixo apresenta-se a lista de materiais interativa e a visualização 3D da placa de circuito impresso desenhada. Esta visualização utiliza PBR (Physically Based Rendering) para simular materiais reais.</p>
@@ -252,7 +237,7 @@
             </div>
 
             <div style="width: 100%; height: 500px; background-color: #eee; border-radius: 4px; overflow: hidden; border: 1px solid #ccc;">
-                <!-- 3D VIEWER: HIGH FIDELITY SETTINGS -->
+                <!-- 3D VIEWER PCB-->
                 <model-viewer 
                     id="pcb-viewer"
                     src="pcb.glb" 
@@ -271,16 +256,13 @@
                 </model-viewer>
             </div>
 
-            <!-- Script to Pause Rotation on Hover -->
             <script>
                 const modelViewer = document.querySelector('#pcb-viewer');
                 
-                // Stop rotation when mouse enters
                 modelViewer.addEventListener('mouseenter', () => {
                     modelViewer.removeAttribute('auto-rotate');
                 });
                 
-                // Resume rotation when mouse leaves
                 modelViewer.addEventListener('mouseleave', () => {
                     modelViewer.setAttribute('auto-rotate', '');
                 });
@@ -291,80 +273,105 @@
 
         <section id="soft">
             <h3>Software</h3>
-            <p>Detalhes sobre o software desenvolvido...</p>
+            <h4>Protocolo I2C</h4>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="I2C.svg" alt="I2C" style="max-width: 100%; height: auto;">
+            </div>
+            <h4>Leitura de 16-bits</h4>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="r16.svg" alt="read16bits" style="height: 25cm; width: auto;">
+            </div>
+            <h4>Driver LCD</h4>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="LCD.svg" alt="LCD" style="max-width: 100%; height: auto;">
+            </div>
+            <h4>Inicialização dos Sensores</h4>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="setupSensors.svg" sizes="50%" alt="setupSensors" style="height: 25cm; width: auto;;">
+            </div>
+            <h4>Leitura dos Sensores</h4>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="readSensors.svg" alt="readSensors" style="height: 25cm; width: auto;">
+            </div>
+            <h4>Interrupções</h4>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="ISR.svg" alt="ISR" style="max-width: 25%; height: auto;">
+            </div>
+            <h4>Loop Principal</h4>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="main.svg" alt="Main" style="height: 40cm; width: auto;">
+            </div>
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
 
         <section id="res">
             <h3>Resultados</h3>
-            <p>Após a montagem do hardware e a programação dos drivers "Bare Metal", o sistema foi submetido a uma série de testes funcionais para validar os requisitos iniciais.</p>
+            <p>Após a montagem do hardware e a programação dos drivers, o sistema foi submetido a testes para validar os requisitos iniciais.</p>
 
             <h4>Demonstração do Funcionamento</h4>
             <p>O vídeo seguinte demonstra o sistema em funcionamento, incluindo a leitura dos sensores e a atuação do servo mediante a deteção de chuva.</p>
-            <div class="missing-img">
-                [Vídeo video01.mp4 deve ficar aqui]
+            
+            <!-- VIDEO HERE -->
+            <div style="text-align: center; margin: 20px 0; background-color: #000; border-radius: 4px; overflow: hidden;">
+                <video id="demo-video" width="100%" height="auto" controls autoplay loop muted>
+                    <source src="proto.mp4" type="video/mp4">
+                    O seu navegador não suporta a tag de vídeo.
+                </video>
             </div>
-            <span class="figure-caption">*Vídeo 1 - Demonstração do Sistema Completo*</span>
 
             <h4>Protótipo Funcional</h4>
-            <div class="missing-img">[Foto: O sistema completo montado na breadboard com o LCD ligado]</div>
-            <p>A integração dos componentes foi bem sucedida. O barramento I2C, partilhado por três dispositivos (LCD, AHT20, BMP280), operou de forma estável a 100kHz, sem conflitos de endereçamento.</p>
+            <div class="prototype image" style="text-align: center; margin: 20px 0;"><img src="house.png" alt="Prototype" style="max-width: 100%; height: auto;"></div>
 
-            <h4>Testes de Validação</h4>
-            <ul>
-                <li><strong>Leitura de Sensores:</strong> O sistema apresenta leituras consistentes. A temperatura e humidade do AHT20 reagem rapidamente a mudanças (ex: soprar no sensor), e o BMP280 reporta a pressão atmosférica correta para a altitude local (~1013 hPa ao nível do mar).</li>
-                <li><strong>Lógica de "Real Feel":</strong> Verificou-se a alteração correta dos LEDs de estado. Ao aquecer artificialmente o sensor acima de 29°C, o LED Vermelho ativou-se conforme programado no algoritmo de <em>Heat Index</em>.</li>
-                <li><strong>Proteção Automática (Chuva):</strong> O sensor de chuva resistivo demonstrou uma resposta imediata (< 50ms). Ao detetar humidade, o servomotor rodou para a posição de 90° ("Fechado") e o LCD atualizou o estado para "RAINING".</li>
-            </ul>
-
-            <h4>Eficiência de Memória (Bare Metal vs. Bibliotecas)</h4>
-            <p>Um dos principais objetivos da abordagem "Bare Metal" era a otimização de recursos. Comparando o nosso código final com uma implementação equivalente utilizando bibliotecas Arduino padrão (Adafruit_Sensor, LiquidCrystal_I2C, Servo.h), observou-se uma redução drástica no uso de memória:</p>
-            
-            <table border="1" style="width:100%; border-collapse: collapse; margin: 20px 0; text-align: center;">
-                <tr style="background-color: #0099ff; color: white;">
-                    <th style="padding: 10px;">Métrica</th>
-                    <th>Abordagem Bare Metal (Este Projeto)</th>
-                    <th>Abordagem Arduino (Estimativa)</th>
-                    <th>Ganho</th>
-                </tr>
-                <tr>
-                    <td style="padding: 8px; font-weight: bold;">Memória Flash (Programa)</td>
-                    <td>~3 KB</td>
-                    <td>~12 KB</td>
-                    <td style="color: green; font-weight: bold;">~75% Livre</td>
-                </tr>
-                <tr>
-                    <td style="padding: 8px; font-weight: bold;">Latência de Arranque</td>
-                    <td>Imediata (< 100ms)</td>
-                    <td>Lenta (~2s bootloader)</td>
-                    <td style="color: green; font-weight: bold;">Mais Rápido</td>
-                </tr>
-            </table>
-            <span class="figure-caption">*Tabela 1 - Comparação de eficiência de recursos*</span>
-
-            <p>Isto comprova que a escrita de drivers personalizados, embora mais complexa, resulta num firmware significativamente mais leve e eficiente.</p>
 
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
 
         <section id="concl">
             <h3>Conclusões</h3>
-            <p>Conclusões finais do projeto...</p>
+            <p>O projeto atingiu sucesso nos objetivos principais, resultando num sistema funcional de monitorização meteorológica residencial.</p>
+
+            
+            <p>Relativamente ao cálculo da Sensação Térmica, a implementação do algoritmo padrão da NOAA exige múltiplos ajustes condicionais, cujos quais não foram aplicados a tempo da apresentação, ficando assim como sugestão para trabalho futuro.</p>
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
         </section>
 
         <section id="ref" class="references">
             <h3>Referências</h3>
-            <p>[1] Alcatel—SAM-O Service Aware Manager Open Interface, Release 3.0.</p>
-            <p>[2] AZEVEDO, Carlos—Metodologia Científica: contributos práticos.</p>
-            <p>[3] Hofmann, Alfred—Lecture Notes in Computer Science.</p>
-            <p>[4] AHT20 Datasheet, ASAIR.</p>
-            <p>[5] BMP280 Datasheet, Bosch Sensortec.</p>
-            <p>[6] ATmega328P Datasheet, Microchip Technology.</p>
+            <p>[1] <a href="https://files.seeedstudio.com/wiki/Grove-AHT20_I2C_Industrial_Grade_Temperature_and_Humidity_Sensor/AHT20-datasheet-2020-4-16.pdf" target="_blank">AHT20 Datasheet, ASAIR.</a></p>
+            <p>[2] <a href="https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmp280-ds001.pdf" target="_blank">BMP280 Datasheet, Bosch Sensortec.</a></p>
+            <p>[3] <a href="https://www.handsontec.com/dataspecs/I2C_2004_LCD.pdf" target="_blank">LCD2004 User Guide, Handson Technology.</a></p>
+            <p>[4] <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf" target="_blank">ATmega328P Datasheet, Microchip Technology.</a></p>
             <a href="#inicio" class="back-to-top">↑ Voltar ao Início</a>
+            
         </section>
 
     </div>
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById("demo-video");
+            
+            if (video) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+                            video.play().catch(e => console.log("Autoplay blocked:", e));
+                        } else {
+                            video.pause();
+                        }
+                    });
+                }, {
+                    threshold: 0.9
+                });
+                
+                observer.observe(video);
+            }
+        });
+    </script>
+    <script>
+        let vid = document.getElementById("demo-video");
+        vid.volume = 0.4; 
+    </script>
 </body>
 </html>
